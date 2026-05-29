@@ -2,6 +2,7 @@ package Buoi3;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import Buoi2.Date;
 
 public class SinhVien {
     public static Scanner sc = new Scanner(System.in);

@@ -1,5 +1,5 @@
 package Buoi3;
-import java.util.Scanner;
+import Buoi2.Diem;
 
 public class DoanThang {
     Diem d1, d2;
@@ -15,6 +15,7 @@ public class DoanThang {
         this.d1 = new Diem(ax, ay);
         this.d2 = new Diem(bx, by);
     }
+
     public void nhapDoanThang(){
         System.out.println("Nhap diem d1: ");
         this.d1.nhapDiem();

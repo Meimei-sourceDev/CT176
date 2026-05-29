@@ -43,4 +43,7 @@ public class Date {
         LocalDate plusDate = current.plusDays(n);
         return new Date(plusDate.getDayOfMonth(), plusDate.getMonthValue(), plusDate.getYear());
     }
+    public String toString(){
+        return "Ngay "+ this.ngay+" thang "+ this.thang+" nam "+ this.nam;
+    }
 }

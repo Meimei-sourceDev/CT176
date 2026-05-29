@@ -1,4 +1,5 @@
 package Buoi3;
+import Buoi2.Diem;
 
 public class SDDoanThang {
     public static void main(String[] args){
