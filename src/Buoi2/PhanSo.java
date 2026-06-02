@@ -1,94 +1,131 @@
 package Buoi2;
 
-import java.math.BigInteger;
 import java.util.Scanner;
+
 public class PhanSo {
-    public static Scanner sc = new Scanner(System.in);
-    private int tu, mau;
-    public PhanSo(){};
-    public PhanSo(int tu, int mau){
+    private static final Scanner sc = new Scanner(System.in);
+    private int tu;
+    private int mau;
+
+    public PhanSo() {
+        this.tu = 0;
+        this.mau = 1;
+    }
+
+    public PhanSo(int tu, int mau) {
+        if (mau == 0) {
+            throw new IllegalArgumentException("Denominator cannot be zero.");
+        }
         this.tu = tu;
         this.mau = mau;
+        rutGon();
     }
 
-    public void rutGon(){
-        if(this.mau < 0){
-            this.tu = -this.tu;
+    private int gcd(int a, int b) {
+        return b == 0 ? Math.abs(a) : gcd(b, a % b);
+    }
+
+    public void rutGon() {
+        if (mau < 0) {
             this.mau = -this.mau;
+            this.tu = -this.tu;
         }
-        BigInteger a = BigInteger.valueOf(this.tu);
-        BigInteger b = BigInteger.valueOf(this.mau);
-        int gcd = a.gcd(b).intValue();
-        this.tu = this.tu/ gcd;
-        this.mau = this.mau/ gcd;
+        int g = gcd(this.tu, this.mau);
+        if (g != 0) {
+            this.tu /= g;
+            this.mau /= g;
+        }
     }
 
-    public boolean hopLe(){
-        if(this.mau == 0) return false;
-        else return true;
-    }
-
-    public void nhapPhanSo(){
-        while(true){
-            System.out.print("Nhap tu so: ");
+    public void nhap() {
+        while (true) {
+            System.out.print("Nhap tu: ");
             this.tu = sc.nextInt();
-            System.out.print("Nhap mau so: ");
-            this.mau = sc.nextInt();
-            if(hopLe()) break;
-            else{
-                System.out.println("Mau so phai khac 0.");
+            System.out.print("Nhap mau: ");
+            int inputMau = sc.nextInt();
+            if (inputMau == 0) {
+                System.out.println("Syntax error (Denominator cannot be zero), try again.");
+            } else {
+                this.mau = inputMau;
+                rutGon();
+                break;
             }
         }
     }
 
-    public void hienThi(){
-        if(!hopLe()) System.out.println("Phan so khong hop le");
-        else if(this.tu == 0) System.out.println("0");
-        else if(this.mau == 1) System.out.println(this.tu);
-        else{
-            System.out.println(this.tu + "/" + this.mau);
+    public void hienThi() {
+        if (this.tu == 0) {
+            System.out.println("Phan so: 0");
+        } else if (this.mau == 1) {
+            System.out.println("Phan so: " + this.tu);
+        } else {
+            System.out.println("Phan so: " + this.tu + "/" + this.mau);
         }
+        System.out.println("Thap phan: " + toDecimal());
     }
-    public PhanSo giaTriNghichDao(){
-        return new PhanSo(this.mau, this.tu);
+
+    @Override
+    public String toString() {
+        return this.mau == 1 ? String.valueOf(this.tu) : String.format("%d/%d", this.tu, this.mau);
     }
-    public void nghichDao(){
+
+    public double toDecimal() {
+        return (double) this.tu / this.mau;
+    }
+
+    public boolean lonHon(PhanSo a) {
+        return (long) this.tu * a.mau > (long) a.tu * this.mau;
+    }
+
+    public void nghichDao() {
+        if (this.tu == 0) {
+            throw new ArithmeticException("Cannot invert a fraction with a numerator of zero.");
+        }
         int swap = this.tu;
         this.tu = this.mau;
         this.mau = swap;
+        rutGon();
     }
 
-    public PhanSo cong(PhanSo a){
-        return new PhanSo(tu * a.mau + mau * a.tu, mau * a.mau);
+    public PhanSo giaTriNghichDao() {
+        return new PhanSo(this.mau, this.tu);
     }
-    public PhanSo tru(PhanSo a){
-        return new PhanSo(tu * a.mau - mau * a.tu, mau * a.mau);
+
+    public PhanSo cong(int n) {
+        return new PhanSo(this.tu + this.mau * n, this.mau);
     }
-    public PhanSo nhan(PhanSo a){
-        return new PhanSo(tu * a.tu, mau * a.mau);
+
+    public PhanSo tru(int n) {
+        return new PhanSo(this.tu - this.mau * n, this.mau);
     }
-    public PhanSo chia(PhanSo a){
-        if(a.tu == 0){
-            throw new ArithmeticException("Cannot divide by zero");
+
+    public PhanSo nhan(int n) {
+        return new PhanSo(this.tu * n, this.mau);
+    }
+
+    public PhanSo chia(int n) {
+        if (n == 0) {
+            throw new ArithmeticException("Cannot divide by zero.");
         }
-        return this.nhan(a.giaTriNghichDao());
+        return new PhanSo(this.tu, this.mau * n);
     }
 
-    public PhanSo cong(int n){
-        return new PhanSo(tu + mau * n, mau);
-    }
-    public PhanSo tru(int n){
-        return new PhanSo(tu - mau * n, mau);
-    }
-    public PhanSo nhan(int n){
-        return new PhanSo(tu * n, mau);
-    }
-    public PhanSo chia(int n){
-        if(n == 0) throw new ArithmeticException("Cannot divide by zero");
-        return new PhanSo(tu, mau * n);
-    }
-    public boolean lonHon(PhanSo a){
-        return a.mau * tu > a.tu * mau;
+    public PhanSo cong(PhanSo a) {
+        return new PhanSo(this.tu * a.mau + a.tu * this.mau, this.mau * a.mau);
     }
 
+    public PhanSo tru(PhanSo a) {
+        return new PhanSo(this.tu * a.mau - a.tu * this.mau, this.mau * a.mau);
+    }
+
+    public PhanSo nhan(PhanSo a) {
+        return new PhanSo(this.tu * a.tu, this.mau * a.mau);
+    }
+
+    public PhanSo chia(PhanSo a) {
+        if (a.tu == 0) {
+            throw new ArithmeticException("Cannot divide by zero.");
+        }
+        return new PhanSo(this.tu * a.mau, this.mau * a.tu);
+    }
 }

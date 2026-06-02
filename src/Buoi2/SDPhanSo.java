@@ -16,8 +16,8 @@ public class SDPhanSo {
         b.hienThi();
         PhanSo x = new PhanSo();
         PhanSo y = new PhanSo();
-        x.nhapPhanSo();
-        y.nhapPhanSo();
+        x.nhap();
+        y.nhap();
         x.giaTriNghichDao().hienThi();
         PhanSo tong = x.cong(y);
         tong.rutGon();
@@ -31,7 +31,7 @@ public class SDPhanSo {
 
         for(int i = 0; i < n; i++){
             list[i] = new PhanSo();
-            list[i].nhapPhanSo();
+            list[i].nhap();
             SUM = SUM.cong(list[i]);
             if(list[i].lonHon(MAX)){
                 MAX = list[i];
@@ -41,8 +41,7 @@ public class SDPhanSo {
         MAX.hienThi();
         for(int i = 0; i < n; i++){
             for(int j = 0; j < n - i - 1; j ++){
-                if(list[j].lonHon(list[j + 1]))
-                swap(list, j, j + 1);
+                if(list[j].lonHon(list[j + 1])) swap(list, j, j + 1);
             }
         }
         System.out.println("Sorted list:");

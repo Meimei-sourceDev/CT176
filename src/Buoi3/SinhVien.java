@@ -2,12 +2,12 @@ package Buoi3;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import Buoi2.Date;
+import Buoi2.myDate;
 
 public class SinhVien {
     public static Scanner sc = new Scanner(System.in);
     private String MSSV, HoTen;
-    private Date birthdate;
+    private myDate birthdate;
     private int soHP;
     private ArrayList<String> tenHP;
     private ArrayList<String> diemHP;
@@ -15,7 +15,7 @@ public class SinhVien {
     public SinhVien(){
         this.MSSV = "";
         this.HoTen = "";
-        this.birthdate = new Date();
+        this.birthdate = new myDate();
         this.soHP = 0;
         this.tenHP = new ArrayList<>();
         this.diemHP = new ArrayList<>();
@@ -24,7 +24,7 @@ public class SinhVien {
     public void nhapThongTin(){
         System.out.print("Nhap MSSV: "); this.MSSV = sc.nextLine();
         System.out.print("Nhap Ho va ten: "); this.HoTen = sc.nextLine();
-        System.out.print("Nhap ngay sinh sinh vien: "); birthdate.nhapNgay();
+        System.out.print("Nhap ngay sinh sinh vien: "); birthdate.nhap();
     }
 
     public void nhapDiemHP(){
