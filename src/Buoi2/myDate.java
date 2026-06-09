@@ -54,6 +54,7 @@ public class myDate {
     public String toString(){
         return String.format("%02d/%02d/%d", day,month,year);
     }
+
     public int getDay(){
         return this.day;
     }

@@ -23,6 +23,7 @@ public class SDGach {
         if(cheapest != null){
             System.out.print("Gach co chi phi thap nhat la: ");
             cheapest.hienThi();
+            System.out.println();
         }
         int chieuDai = 5 * 100;
         int chieuRong = 20 * 100;

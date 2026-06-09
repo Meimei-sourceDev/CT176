@@ -12,7 +12,7 @@ public class SDmyDate {
         dayB.nhap();
         dayB.hienThi();
 
-        myDate dayC = dayB.plusDate();
+        myDate dayC = dayB.plusDate(70);
         dayC.hienThi();
     }
 }

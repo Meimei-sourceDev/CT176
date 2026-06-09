@@ -2,8 +2,13 @@ package Buoi2;
 
 import java.util.Scanner;
 
+class MathFunction{
+    public static int gcd(int a, int b) {
+        return b == 0 ? Math.abs(a) : gcd(b, a % b);
+    }
+}
+
 public class PhanSo {
-    private static final Scanner sc = new Scanner(System.in);
     private int tu;
     private int mau;
 
@@ -21,8 +26,9 @@ public class PhanSo {
         rutGon();
     }
 
-    private int gcd(int a, int b) {
-        return b == 0 ? Math.abs(a) : gcd(b, a % b);
+    public PhanSo(PhanSo khac){
+        this.tu = khac.tu;
+        this.mau = khac.mau;
     }
 
     public void rutGon() {
@@ -30,7 +36,7 @@ public class PhanSo {
             this.mau = -this.mau;
             this.tu = -this.tu;
         }
-        int g = gcd(this.tu, this.mau);
+        int g = MathFunction.gcd(this.tu, this.mau);
         if (g != 0) {
             this.tu /= g;
             this.mau /= g;
@@ -38,6 +44,7 @@ public class PhanSo {
     }
 
     public void nhap() {
+        Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.print("Nhap tu: ");
             this.tu = sc.nextInt();
