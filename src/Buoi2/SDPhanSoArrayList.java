@@ -6,6 +6,7 @@ import java.util.Comparator;
 public class SDPhanSoArrayList {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
+
         ArrayList<PhanSo> psList = new ArrayList<>();
         System.out.println("Nhap so luong phan so: "); int n = sc.nextInt();
 
@@ -20,9 +21,15 @@ public class SDPhanSoArrayList {
             sum = sum.cong(ps);
         }
 
+        sum.hienThi();
+
         PhanSo max = psList.stream()
                 .max(Comparator.comparingDouble(PhanSo::toDecimal))
                         .orElse(null);
+
+        if(max != null){
+            max.hienThi();
+        }
 
         psList.sort(Comparator.comparing(PhanSo::toDecimal).reversed());
         for(PhanSo ps : psList){
