@@ -14,6 +14,8 @@ public class SDClock {
 		
 		c2.nhap();
 		c2.in();
+		c2.lamTron();
+		c2.in();
 		
 		System.out.println("Nhap phut: "); int n = sc.nextInt();
 		Clock c3 = c2.congPhut(n);

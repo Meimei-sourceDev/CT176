@@ -11,9 +11,14 @@ public class Diem {
         this.x = x;
         this.y = y;
     }
+
+    public Diem(Diem d){
+        this.x = d.x;
+        this.y = d.y;
+    }
     public void nhapDiem(){
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap diem: ");
+        System.out.print("Nhap diem: (x; y)");
         x = sc.nextInt();
         y = sc.nextInt();
     }
@@ -38,5 +43,16 @@ public class Diem {
                 Math.pow(x - d.x, 2) +
                Math.pow(y - d.y, 2 )
         );
+    }
+
+    //Bo sung
+
+    public boolean equals(Diem d){
+        return this.x == d.x && this.y == d.y;
+    }
+
+    @Override
+    public String toString(){
+        return "x = " + x + ", y = " + y;
     }
 }
